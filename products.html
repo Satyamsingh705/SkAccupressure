@@ -30,6 +30,30 @@
             background-color: #15803d;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
+
+        /* Add these styles with existing ones */
+        .social-icons {
+            margin-top: 15px;
+            display: flex;
+            gap: 15px;
+        }
+        .social-icons a {
+            text-decoration: none;
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+        .social-icons .fa-instagram {
+            color: #E4405F;
+        }
+        .social-icons .fa-facebook {
+            color: #1877F2;
+        }
+        .social-icons .fa-telegram {
+            color: #0088cc;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
     </style>
 </head>
 <body>
@@ -76,6 +100,11 @@
                 <h3><i class="fas fa-phone-alt"></i> Contact Us</h3>
                 <p><i class="fas fa-phone"></i> +91 7879925587</p>
                 <p><i class="fas fa-envelope"></i> singhjishivam65@gmail.com</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.telegram.org" target="_blank"><i class="fab fa-telegram"></i></a>
+                </div>
             </div>
             <div class="footer-section">
                 <h3><i class="fas fa-clock"></i> Hours</h3>
