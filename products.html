@@ -96,7 +96,13 @@
 
     <script src="main.js"></script>
     <script>
-        // Add this script at the end of body
+        // Initialize the products button as active when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const productsBtn = document.querySelector('.nav-btn[data-section="products"]');
+            productsBtn.classList.add('active');
+        });
+
+        // Existing navigation button click handlers
         document.querySelectorAll('.nav-btn').forEach(button => {
             button.addEventListener('click', (e) => {
                 const section = e.target.dataset.section;
