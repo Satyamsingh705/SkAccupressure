@@ -3,9 +3,546 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acupressure Wellness Center</title>
-  <link rel="stylesheet" href="style.css">
+  <title>SK Acupressure</title>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.5;
+      color: #1a1a1a;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 80vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: white;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&q=80');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      transition: transform 2s;
+    }
+
+    .hero:hover::before {
+      transform: scale(1);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 0 1.5rem;
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero p {
+      font-size: clamp(1.125rem, 2vw, 1.25rem);
+      margin-bottom: 2rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background-color: #16a34a;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 9999px;
+      font-size: 1.125rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-primary:hover {
+      background-color: #15803d;
+      transform: scale(1.05);
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    }
+
+    .btn-secondary {
+      background-color: #f9fafb;
+      color: #16a34a;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      width: 100%;
+    }
+
+    .btn-secondary:hover {
+      background-color: #16a34a;
+      color: white;
+    }
+
+    .btn-call {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: #16a34a;
+      color: white;
+      padding: 0.75rem 1.25rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn-call:hover {
+      background-color: #15803d;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+
+    .btn-call i {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: white;
+      padding: 2rem 1rem;
+      margin: -2.5rem 1rem 0;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 20;
+    }
+
+    .stats-grid {
+      max-width: 72rem;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-item i {
+      color: #16a34a;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    /* Services Section */
+    .services-section {
+      padding: 5rem 1rem;
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.875rem, 3vw, 2.25rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .section-divider {
+      width: 6rem;
+      height: 0.25rem;
+      background-color: #16a34a;
+      margin: 0 auto;
+    }
+
+    .services-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .service-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      text-align: center;
+    }
+
+    .service-card:hover {
+      transform: translateY(-0.5rem);
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    }
+
+    .service-icon {
+      display: inline-flex;
+      padding: 1rem;
+      background-color: #f0fdf4;
+      border-radius: 9999px;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-icon i {
+      color: #16a34a;
+      width: 3rem;
+      height: 3rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .service-card p {
+      color: #6b7280;
+      margin-bottom: 1rem;
+    }
+
+    .service-card .price {
+      color: #16a34a;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Products Section */
+    .products-section {
+      background-color: #f9fafb;
+      padding: 5rem 1rem;
+    }
+
+    .products-grid {
+      max-width: 72rem;
+      margin: 0 auto;
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    }
+
+    .product-image {
+      position: relative;
+      height: 12rem;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+
+    .product-tag {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background-color: #16a34a;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+    }
+
+    .product-info {
+      padding: 1.5rem;
+    }
+
+    .product-info h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-info p {
+      color: #6b7280;
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .product-footer .price {
+      color: #16a34a;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin: 0;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #111827;
+      color: white;
+      padding: 5rem 1rem 2.5rem;
+    }
+
+    .footer-content {
+      max-width: 72rem;
+      margin: 0 auto;
+      display: grid;
+      gap: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      margin-bottom: 4rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-info a,
+    .address {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contact-info a:hover {
+      color: #4ade80;
+    }
+
+    .hours-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .hours-row.closed {
+      color: #9ca3af;
+    }
+
+    .footer-bottom {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid #1f2937;
+      text-align: center;
+      color: #9ca3af;
+    }
+
+    /* Product Slider Styles */
+    @media (max-width: 640px) {
+      .products-grid {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        padding: 0 1rem;
+      }
+
+      .product-card {
+        display: none;
+        width: 100%;
+        margin: 0 auto;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        position: absolute;
+        left: 0;
+        right: 0;
+      }
+
+      .product-card.active {
+        display: block;
+        opacity: 1;
+        position: relative;
+      }
+
+      .slider-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .slider-dots {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .slider-dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background-color: #d1d5db;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .slider-dot.active {
+        background-color: #16a34a;
+        transform: scale(1.5);
+      }
+
+      .slider-button {
+        background-color: #16a34a;
+        color: white;
+        border: none;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .slider-button:hover {
+        background-color: #15803d;
+        transform: scale(1.1);
+      }
+
+      .slider-button:disabled {
+        background-color: #d1d5db;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .hero {
+        height: 70vh;
+      }
+      
+      .stats-grid {
+        gap: 1rem;
+      }
+      
+      .service-card,
+      .product-card {
+        margin: 0 auto;
+        max-width: 400px;
+      }
+      
+      .footer-content {
+        text-align: center;
+      }
+      
+      .contact-info a,
+      .address {
+        justify-content: center;
+      }
+      
+      .product-footer {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .btn-call {
+        justify-content: center;
+      }
+      
+      .map-container {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        border-radius: 0;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="min-h-screen bg-gray-50">
@@ -89,7 +626,7 @@
         <div class="section-divider"></div>
       </div>
       <div class="products-grid">
-        <div class="product-card">
+        <div class="product-card active">
           <div class="product-image">
             <img src="https://images.unsplash.com/photo-1577086664693-894d8405334a?auto=format&fit=crop&q=80" alt="Herbal Supplements">
             <span class="product-tag">Bestseller</span>
@@ -157,6 +694,16 @@
             </div>
           </div>
         </div>
+        <!-- Add slider controls for mobile -->
+        <div class="slider-controls">
+          <button class="slider-button prev" aria-label="Previous slide">
+            <i data-lucide="chevron-left"></i>
+          </button>
+          <div class="slider-dots"></div>
+          <button class="slider-button next" aria-label="Next slide">
+            <i data-lucide="chevron-right"></i>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -170,7 +717,7 @@
               <i data-lucide="phone"></i>
               <span>+91 7879925587</span>
             </a>
-            <a href="mailto:info@acupressure.com">
+            <a href="mailto:singhjishivam65@gmail.com">
               <i data-lucide="mail"></i>
               <span>singhjishivam65@gmail.com</span>
             </a>
@@ -213,8 +760,6 @@
               <i data-lucide="map-pin"></i>
               <span>petrol pump, Garhpura,<br>Dunha, Bihar 848204</span>
             </div>
-            <a href="tel:+917879925587">
-            </a>
           </div>
         </div>
       </div>
@@ -228,6 +773,119 @@
   <script>
     // Initialize Lucide icons
     lucide.createIcons();
+
+    // Product Slider functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const isMobile = window.innerWidth <= 640;
+      if (!isMobile) return;
+
+      const products = document.querySelectorAll('.product-card');
+      const dotsContainer = document.querySelector('.slider-dots');
+      const prevButton = document.querySelector('.slider-button.prev');
+      const nextButton = document.querySelector('.slider-button.next');
+      let currentIndex = 0;
+      let autoSlideInterval;
+
+      // Create dots
+      products.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('slider-dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+      });
+
+      // Update active slide
+      function updateSlide() {
+        products.forEach((product, index) => {
+          product.classList.toggle('active', index === currentIndex);
+        });
+        
+        document.querySelectorAll('.slider-dot').forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentIndex);
+        });
+
+        // Update button states
+        prevButton.disabled = currentIndex === 0;
+        nextButton.disabled = currentIndex === products.length - 1;
+      }
+
+      // Go to specific slide
+      function goToSlide(index) {
+        currentIndex = index;
+        updateSlide();
+        resetAutoSlide();
+      }
+
+      // Next slide
+      function nextSlide() {
+        if (currentIndex < products.length - 1) {
+          currentIndex++;
+          updateSlide();
+          resetAutoSlide();
+        }
+      }
+
+      // Previous slide
+      function prevSlide() {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateSlide();
+          resetAutoSlide();
+        }
+      }
+
+      // Auto slide functionality
+      function startAutoSlide() {
+        autoSlideInterval = setInterval(() => {
+          if (currentIndex === products.length - 1) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          updateSlide();
+        }, 3000); // Change slide every 3 seconds
+      }
+
+      function resetAutoSlide() {
+        clearInterval(autoSlideInterval);
+        startAutoSlide();
+      }
+
+      // Event listeners
+      prevButton.addEventListener('click', prevSlide);
+      nextButton.addEventListener('click', nextSlide);
+
+      // Touch events for swipe
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      document.querySelector('.products-grid').addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, false);
+
+      document.querySelector('.products-grid').addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, false);
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+        }
+      }
+
+      // Initialize
+      updateSlide();
+      startAutoSlide();
+    });
   </script>
 </body>
 </html>
