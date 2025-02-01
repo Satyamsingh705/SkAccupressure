@@ -5,7 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SK Acupressure</title>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
+    /* Add these new navbar styles before existing styles */
+    .navbar {
+      background-color: white;
+      padding: 1rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #16a34a;
+    }
+
+    .logo h1 {
+      font-size: 1.75rem;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-btn {
+      background: #16a34a;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.3s;
+      min-width: 120px;
+      text-align: center;
+    }
+
+    .nav-btn:hover {
+      background-color: #15803d;
+      transform: translateY(-2px);
+    }
+
+    .nav-btn.active {
+      background-color: #15803d;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+
+    /* Adjust hero section to account for navbar */
+    .hero {
+      margin-top: 8rem;
+    }
+    
     /* Base styles */
     * {
       margin: 0;
@@ -546,6 +612,19 @@
 </head>
 <body>
   <div class="min-h-screen bg-gray-50">
+    <!-- Add this navbar before the hero section -->
+    <nav class="navbar">
+      <div class="logo">
+        <i class="fas fa-leaf"></i>
+        <h1>SK Acupressure</h1>
+      </div>
+      <div class="nav-links">
+        <button class="nav-btn active" data-section="home">Home</button>
+        <button class="nav-btn" data-section="products">Products</button>
+        <button class="nav-btn" data-section="services">Services</button>
+      </div>
+    </nav>
+
     <!-- Hero Section -->
     <header class="hero">
       <div class="hero-overlay"></div>
@@ -704,6 +783,13 @@
             <i data-lucide="chevron-right"></i>
           </button>
         </div>
+      </div>
+      <!-- Add this view all products button container -->
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="products.html" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+          View All Products
+          <i data-lucide="arrow-right"></i>
+        </a>
       </div>
     </section>
 
@@ -870,8 +956,7 @@
       }, false);
 
       function handleSwipe() {
-       
-        const swipeThreshold = 0; 
+        const swipeThreshold = 50;
         const diff = touchStartX - touchEndX;
 
         if (Math.abs(diff) > swipeThreshold) {
@@ -886,6 +971,32 @@
       // Initialize
       updateSlide();
       startAutoSlide();
+    });
+
+    // Add navigation functionality
+    document.querySelectorAll('.nav-btn').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const section = e.target.dataset.section;
+        if (section === 'products') {
+          window.location.href = 'products.html';
+        } else if (section === 'services') {
+          // Scroll to services section
+          const servicesSection = document.querySelector('.services-section');
+          const navbarHeight = document.querySelector('.navbar').offsetHeight;
+          window.scrollTo({
+            top: servicesSection.offsetTop - navbarHeight,
+            behavior: 'smooth'
+          });
+        } else if (section === 'home') {
+          window.location.href = 'index.html';
+        }
+        
+        // Update active button state
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        e.target.classList.add('active');
+      });
     });
   </script>
 </body>
