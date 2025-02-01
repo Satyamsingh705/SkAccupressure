@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SK Acupressure</title>
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    /* Add these new navbar styles before existing styles */
+    /* Updated Navbar Styles */
     .navbar {
       background-color: white;
-      padding: 1rem;
+      padding: 0.75rem 2rem;
       position: fixed;
       top: 0;
       left: 0;
@@ -18,9 +18,8 @@
       z-index: 1000;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      gap: 1rem;
     }
 
     .logo {
@@ -38,38 +37,86 @@
 
     .nav-links {
       display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
+      gap: 1rem;
+      align-items: center;
     }
 
-    .nav-btn {
-      background: #16a34a;
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
+    .hamburger {
+      display: none;
       cursor: pointer;
-      font-size: 1rem;
-      font-weight: 500;
-      transition: all 0.3s;
-      min-width: 120px;
-      text-align: center;
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      transition: transform 0.3s ease;
     }
 
-    .nav-btn:hover {
-      background-color: #15803d;
-      transform: translateY(-2px);
+    .hamburger i {
+      font-size: 1.5rem;
+      color: #16a34a;
+      transition: transform 0.3s ease;
     }
 
-    .nav-btn.active {
-      background-color: #15803d;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    .hamburger:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 0;
+        flex-direction: column;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease-in-out;
+        max-height: 0;
+        overflow: hidden;
+      }
+
+      .nav-links.active {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+        padding: 1rem;
+        max-height: 300px;
+      }
+
+      .nav-btn {
+        width: 100%;
+        text-align: center;
+        margin: 0.5rem 0;
+        padding: 0.75rem;
+        border-radius: 8px;
+        background: #f3f4f6;
+        color: #16a34a;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .nav-btn:hover {
+        background: #16a34a;
+        color: white;
+        transform: translateX(5px);
+      }
+
+      .nav-btn.active {
+        background: #16a34a;
+        color: white;
+      }
     }
 
     /* Adjust hero section to account for navbar */
     .hero {
-      margin-top: 8rem;
+      margin-top: 4rem;
     }
     
     /* Base styles */
@@ -632,18 +679,89 @@
     .social-icons a:hover {
       transform: scale(1.2);
     }
+
+    /* Updated Nav Button Styles */
+    .nav-btn {
+        background: #16a34a;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .nav-btn:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            120deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent
+        );
+        transition: all 0.5s ease;
+    }
+
+    .nav-btn:hover:before {
+        left: 100%;
+    }
+
+    .nav-btn:hover {
+        background: #15803d;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+    }
+
+    .nav-btn.active {
+        background: #15803d;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    @media (min-width: 768px) {
+        .nav-links {
+            gap: 1.5rem;
+        }
+
+        .nav-btn {
+            min-width: 120px;
+            letter-spacing: 0.5px;
+        }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 0.5rem 1rem;
+      }
+      
+      .hero {
+        margin-top: 3.5rem;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="min-h-screen bg-gray-50">
-    <!-- Add this navbar before the hero section -->
+    <!-- Replace existing navbar with this -->
     <nav class="navbar">
       <div class="logo">
         <i class="fas fa-leaf"></i>
         <h1>SK Acupressure</h1>
       </div>
+      <button class="hamburger" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </button>
       <div class="nav-links">
-        <!-- <button class="nav-btn active" data-section="home">Home</button> -->
+        <button class="nav-btn" data-section="Home">Home</button>
         <button class="nav-btn" data-section="products">Products</button>
         <button class="nav-btn" data-section="services">Services</button>
       </div>
@@ -850,23 +968,34 @@
           </div>
         </div>
         
-        <div class="footer-section">
-          <h3>Hours</h3>
-          <div class="hours-info">
-            <div class="hours-row">
-              <span>Monday - Friday</span>
-              <span>9:00 AM - 7:00 PM</span>
-            </div>
-            <div class="hours-row">
-              <span>Saturday</span>
-              <span>10:00 AM - 5:00 PM</span>
-            </div>
-            <div class="hours-row closed">
-              <span>Sunday</span>
-              <span>Closed</span>
-            </div>
+        <footer>
+          <div class="footer-content">
+              <div class="footer-section">
+                  <h3><i class="fas fa-phone-alt"></i> Contact Us</h3>
+                  <p><i class="fas fa-phone"></i> +91 7879925587</p>
+                  <p><i class="fas fa-envelope"></i> singhjishivam65@gmail.com</p>
+                  <div class="social-icons">
+                      <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                      <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                      <a href="https://www.telegram.org" target="_blank"><i class="fab fa-telegram"></i></a>
+                  </div>
+              </div>
+              <div class="footer-section">
+                  <h3><i class="fas fa-clock"></i> Hours</h3>
+                  <p>Monday - Friday: 9:00 AM - 7:00 PM</p>
+                  <p>Saturday: 10:00 AM - 5:00 PM</p>
+                  <p>Sunday: Closed</p>
+              </div>
+              <div class="footer-section">
+                  <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+                  <p>petrol pump, Garhpura,</p>
+                  <p>Dunha, Bihar 848204</p>
+              </div>
           </div>
-        </div>
+          <div class="footer-bottom">
+              <p>&copy; 2024 SK Accupressure. All rights reserved.</p>
+          </div>
+      </footer>
         
         <div class="footer-section">
           <h3>Additional Location</h3>
@@ -1026,6 +1155,38 @@
         });
         e.target.classList.add('active');
       });
+    });
+
+    // Hamburger menu functionality
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        // Change hamburger icon
+        const icon = hamburger.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+            navLinks.classList.remove('active');
+            const icon = hamburger.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+
+    // Close menu when clicking a nav button
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            const icon = hamburger.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        });
     });
   </script>
 </body>
