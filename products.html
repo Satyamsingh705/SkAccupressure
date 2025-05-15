@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acupressure Wellness Center</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Add these styles */
+        .nav-btn {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin: 0 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background-color: #15803d;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background-color: #15803d;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        /* Add these styles with existing ones */
+        .social-icons {
+            margin-top: 15px;
+            display: flex;
+            gap: 15px;
+        }
+        .social-icons a {
+            text-decoration: none;
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+        .social-icons .fa-instagram {
+            color: #E4405F;
+        }
+        .social-icons .fa-facebook {
+            color: #1877F2;
+        }
+        .social-icons .fa-telegram {
+            color: #0088cc;
+        }
+        .social-icons .fa-whatsapp {
+            color: #25D366;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <h1><i class="fas fa-leaf"></i> Acupressure Wellness Center</h1>
+        </div>
+        <div class="nav-links">
+            <button class="nav-btn" data-section="Home">Home</button>
+            <button class="nav-btn" data-section="products">Products</button>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Natural Wellness Products</h1>
+        <p>Discover our range of natural healing solutions for a healthier life</p>
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active" data-category="all">
+            <i class="fas fa-th-large"></i> All Products
+        </button>
+        <button class="filter-btn" data-category="FootHeal">
+            <i class="fas fa-pills"></i> FootHeal
+        </button>
+        <button class="filter-btn" data-category="kit">
+            <i class="fas fa-pills"></i> Accupressure Kit
+        </button>
+        <button class="filter-btn" data-category="tools">
+            <i class="fas fa-gem"></i> Healing Tools
+        </button>
+        <button class="filter-btn" data-category="Facial">
+            <i class="fas fa-tint"></i> Facial
+        </button>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search products...">
+    </div>
+
+    <div class="products-container" id="products-grid">
+        <!-- Products will be dynamically added here -->
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-phone-alt"></i> Contact Us</h3>
+                <p><i class="fas fa-phone"></i> +91 7879925587</p>
+                <p><i class="fas fa-envelope"></i> singhjishivam65@gmail.com</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/919297516732" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+                    <a href="https://www.facebook.com/share/19kHgn4QTL/" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://t.me/+919297516732" target="_blank"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-clock"></i> Hours</h3>
+                <p>Monday - Friday: 9:00 AM - 7:00 PM</p>
+                <p>Saturday: 10:00 AM - 5:00 PM</p>
+                <p>Sunday: Closed</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+                <p>petrol pump, Garhpura,</p>
+                <p>Dunha, Bihar 848204</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Acupressure Wellness Center. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        // Initialize the products button as active when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const productsBtn = document.querySelector('.nav-btn[data-section="products"]');
+            productsBtn.classList.add('active');
+        });
+
+        // Existing navigation button click handlers
+        document.querySelectorAll('.nav-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const section = e.target.dataset.section;
+                if (section === 'Home') {
+                    window.location.href = 'index.html';
+                }
+
+                // Update active button state
+                document.querySelectorAll('.nav-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                e.target.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

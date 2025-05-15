@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acupressure Wellness Center</title>
+  <script src="https://unpkg.com/lucide@latest"></script>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Updated Navbar Styles */
+    .navbar {
+      background-color: white;
+      padding: 0.75rem 2rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #16a34a;
+    }
+
+    .logo h1 {
+      font-size: 1.75rem;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .hamburger i {
+      font-size: 1.5rem;
+      color: #16a34a;
+      transition: transform 0.3s ease;
+    }
+
+    .hamburger:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 0;
+        flex-direction: column;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease-in-out;
+        max-height: 0;
+        overflow: hidden;
+      }
+
+      .nav-links.active {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+        padding: 1rem;
+        max-height: 300px;
+      }
+
+      .nav-btn {
+        width: 100%;
+        text-align: center;
+        margin: 0.5rem 0;
+        padding: 0.75rem;
+        border-radius: 8px;
+        background: #f3f4f6;
+        color: #16a34a;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .nav-btn:hover {
+        background: #16a34a;
+        color: white;
+        transform: translateX(5px);
+      }
+
+      .nav-btn.active {
+        background: #16a34a;
+        color: white;
+      }
+    }
+
+    /* Adjust hero section to account for navbar */
+    .hero {
+      margin-top: 4rem;
+    }
+    
+    /* Base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.5;
+      color: #1a1a1a;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 80vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: white;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('https://blogger.googleusercontent.com/img/a/AVvXsEinRp6iBmfSPL0KrK9Z7_wlfiwmz6iEaF40fzh9_nhgAbQUkJEHCtW7zOIEpKBxuHxGfw31zX-qEkasZVwjV8UuW7hgG41SjU5VVe8i27BOhZZmFo1itCSRKsGDQ4sIjv_7rEqt2PqjNvoK1zhPRlCk4ThV--imL9VXiaa3Bhss3EFgJ2X0IS4EGnX2Rf1j');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      transition: transform 2s;
+    }
+
+    .hero:hover::before {
+      transform: scale(1);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 0 1.5rem;
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero p {
+      font-size: clamp(1.125rem, 2vw, 1.25rem);
+      margin-bottom: 2rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background-color: #16a34a;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 9999px;
+      font-size: 1.125rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-primary:hover {
+      background-color: #15803d;
+      transform: scale(1.05);
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    }
+
+    .btn-secondary {
+      background-color: #f9fafb;
+      color: #16a34a;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      width: 100%;
+    }
+
+    .btn-secondary:hover {
+      background-color: #16a34a;
+      color: white;
+    }
+
+    .btn-call {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: #16a34a;
+      color: white;
+      padding: 0.75rem 1.25rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn-call:hover {
+      background-color: #15803d;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+
+    .btn-call i {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: white;
+      padding: 2rem 1rem;
+      margin: -2.5rem 1rem 0;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 20;
+    }
+
+    .stats-grid {
+      max-width: 72rem;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-item i {
+      color: #16a34a;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    /* Services Section */
+    .services-section {
+      padding: 5rem 1rem;
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.875rem, 3vw, 2.25rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .section-divider {
+      width: 6rem;
+      height: 0.25rem;
+      background-color: #16a34a;
+      margin: 0 auto;
+    }
+
+    .services-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .service-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      text-align: center;
+    }
+
+    .service-card:hover {
+      transform: translateY(-0.5rem);
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    }
+
+    .service-icon {
+      display: inline-flex;
+      padding: 1rem;
+      background-color: #f0fdf4;
+      border-radius: 9999px;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-icon i {
+      color: #16a34a;
+      width: 3rem;
+      height: 3rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .service-card p {
+      color: #6b7280;
+      margin-bottom: 1rem;
+    }
+
+    .service-card .price {
+      color: #16a34a;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover img {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .service-card img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    /* Products Section */
+    .products-section {
+      background-color: #f9fafb;
+      padding: 5rem 1rem;
+    }
+
+    .products-grid {
+      max-width: 72rem;
+      margin: 0 auto;
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    }
+
+    .product-image {
+      position: relative;
+      height: 12rem;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+
+    .product-tag {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background-color: #16a34a;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+    }
+
+    .product-info {
+      padding: 1.5rem;
+    }
+
+    .product-info h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-info p {
+      color: #6b7280;
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .product-footer .price {
+      color: #16a34a;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin: 0;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #111827;
+      color: white;
+      padding: 5rem 1rem 2.5rem;
+    }
+
+    .footer-content {
+      max-width: 72rem;
+      margin: 0 auto;
+      display: grid;
+      gap: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      margin-bottom: 4rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-info a,
+    .address {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contact-info a:hover {
+      color: #4ade80;
+    }
+
+    .hours-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .hours-row.closed {
+      color: #9ca3af;
+    }
+
+    .footer-bottom {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid #1f2937;
+      text-align: center;
+      color: #9ca3af;
+    }
+
+    /* Product Slider Styles */
+    @media (max-width: 640px) {
+      .products-grid {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        padding: 0 1rem;
+      }
+
+      .product-card {
+        display: none;
+        width: 100%;
+        margin: 0 auto;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        position: absolute;
+        left: 0;
+        right: 0;
+      }
+
+      .product-card.active {
+        display: block;
+        opacity: 1;
+        position: relative;
+      }
+
+      .slider-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .slider-dots {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .slider-dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background-color: #d1d5db;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .slider-dot.active {
+        background-color: #16a34a;
+        transform: scale(1.5);
+      }
+
+      .slider-button {
+        background-color: #16a34a;
+        color: white;
+        border: none;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .slider-button:hover {
+        background-color: #15803d;
+        transform: scale(1.1);
+      }
+
+      .slider-button:disabled {
+        background-color: #d1d5db;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .hero {
+        height: 70vh;
+      }
+      
+      .stats-grid {
+        gap: 1rem;
+      }
+      
+      .service-card,
+      .product-card {
+        margin: 0 auto;
+        max-width: 400px;
+      }
+      
+      .footer-content {
+        text-align: center;
+      }
+      
+      .contact-info a,
+      .address {
+        justify-content: center;
+      }
+      
+      .product-footer {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .btn-call {
+        justify-content: center;
+      }
+      
+      .map-container {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        border-radius: 0;
+      }
+    }
+
+    /* Add these social media icon styles */
+    .social-icons {
+      margin-top: 15px;
+      display: flex;
+      gap: 15px;
+    }
+    .social-icons a {
+      text-decoration: none;
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+    .social-icons .fa-instagram {
+      color: #E4405F;
+    }
+    .social-icons .fa-facebook {
+      color: #1877F2;
+    }
+    .social-icons .fa-telegram {
+      color: #0088cc;
+    }
+    .social-icons .fa-whatsapp {
+      color: #25D366;
+    }
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+
+    /* Updated Nav Button Styles */
+    .nav-btn {
+        background: #16a34a;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .nav-btn:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            120deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent
+        );
+        transition: all 0.5s ease;
+    }
+
+    .nav-btn:hover:before {
+        left: 100%;
+    }
+
+    .nav-btn:hover {
+        background: #15803d;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+    }
+
+    .nav-btn.active {
+        background: #15803d;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    @media (min-width: 768px) {
+        .nav-links {
+            gap: 1.5rem;
+        }
+
+        .nav-btn {
+            min-width: 120px;
+            letter-spacing: 0.5px;
+        }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 0.5rem 1rem;
+      }
+      
+      .hero {
+        margin-top: 3.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="min-h-screen bg-gray-50">
+    <!-- Replace existing navbar with this -->
+    <nav class="navbar">
+      <div class="logo">
+        <i class="fas fa-leaf"></i>
+        <h1>Acupressure Wellness Center</h1>
+      </div>
+      <button class="hamburger" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links">
+        <button class="nav-btn" data-section="Home">Home</button>
+        <button class="nav-btn" data-section="products">Products</button>
+        <button class="nav-btn" data-section="services">Services</button>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content animate-fadeIn">
+        <h1>Experience the Power of Natural Healing</h1>
+        <p>Discover traditional acupressure therapy for mind, body, and soul wellness</p>
+        <button class="btn-primary">Book Your Session Now</button>
+      </div>
+    </header>
+
+    <!-- Stats Section -->
+    <div class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <i data-lucide="award"></i>
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <i data-lucide="users"></i>
+          <div class="stat-number">5000+</</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat-item">
+          <i data-lucide="star"></i>
+          <div class="stat-number">4.9</div>
+          <div class="stat-label">Rating</div>
+        </div>
+        <div class="stat-item">
+          <i data-lucide="map-pin"></i>
+          <div class="stat-number">2</div>
+          <div class="stat-label">Locations</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services Section -->
+    <section class="services-section">
+      <div class="section-header">
+        <h2>Our Healing Services</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9Xo3FnXFJvm_wes52ZSrc3xNkkspVCwioLlbxSuayuJC3jQ1cIdD3Cw9drkkRhy6XLM23-EGrA53XH_fPCCquWujUPnjHMb4rg-kXMShjyfFLw8hKpRnkAArcZ3y82frzTs2xTf_pgg4YYZ0_acj40wGqTTOzAhv2mqKwGSC2rZWGXM3CWJUPqlZhh38e/s1280/Houston%20Cupping%20Therapy.jpg" alt="Therapeutic Acupressure">
+          <h3>Cupping Therapy</h3>
+          <p>an ancient technique that improves blood circulation, reduces muscle tension, and promotes relaxation.</p>
+          <p class="price">From ₹75/session</p>
+          <button class="btn-secondary">Learn More</button>
+        </div>
+        <div class="service-card">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhr9RGnpJ-wHu8bvY4jFD7aBejoQ4Hh0injtnrSkL4LK6nYAOPLeH4BYYOy5In0EbsWlx7GqJIPu5chmjrh0525Kr6VPjGhlXGVHV6br1elzoTBD99yoUxpFA-qKXwAPMCUZfNVUO2gh2zqGpEqbhs_FUqc_sR5ACWDrjskjVe1KigJmmDM8zqCsmhPmPwE/s1080/WhatsApp%20Image%202025-02-28%20at%20000.13.41_20872671.jpg" alt="Therapeutic Acupressure">
+          <h3>Chakra Light Therapy Bed</h3>
+          <p>**Experience deep relaxation and energy healing with our Chakra Light Therapy Bed.** This therapy uses colored lights, sound, and heat to restore balance, reduce stress, and promote overall well-being.</p>
+          <p class="price">From ₹90/session</p>
+          <button class="btn-secondary">Learn More</button>
+        </div>
+        <div class="service-card">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDW4BNIbTrbs00GFGF_8kDIRzyVf49wSLrV2Mr_E2iAICak12E5Ju6tEK1wUDPCW8pq455G4gpdh7MHoDL3QG9r9IiARSW9ZwYEU7BsYwOhH2ej03bg93WIsHk-FnbQn5ldv3dpKrSv43fslCa-vkpBRXXc4ZSOLHohe77Dy2UcAbd9455ibX1A7XxbSc6/s1080/Heated%20Shiatsu%20Massage%20Seat%20Cushion.jpg" alt="Therapeutic Acupressure">
+          <h3>Heated Shiatsu Massage Seat Cushion</h3>
+          <p>Experience deep relaxation with our Heated Shiatsu Massage Seat Cushion, featuring kneading rollers for neck and back relief. With vibration, heat therapy</p>
+          <p class="price">From ₹60/session</p>
+          <button class="btn-secondary">Learn More</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+      <div class="section-header">
+        <h2>Natural Wellness Products</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="products-grid">
+        <div class="product-card active">
+          <div class="product-image">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNSuAFUbpGjvCycDwv4N4TZ3T8rxVwuNf_9xariWUKTvHIqABkxnDiimN-emtuqAa6QS960DMojIDcDjanzwbQ4TLM94S_nBoXDVmazpXn02q_aIy-gDCVvdL9T43NE4jcCoglp70inIdrNaX6vhnJwkNL9JUlG0Dmoa0XwCQ9CSHviL6rhJXcmt0sLZ2w/s736/Massage%20Slippers%20Sandals%20Flip%20Flops.jpg" alt="Herbal Supplements">
+            <span class="product-tag">Bestseller</span>
+          </div>
+          <div class="product-info">
+            <h3>Massage Slippers Sandals Flip Flops</h3>
+            <p>Neuropathy Arthritis Back Plantar Fasciitis Pain Relief, Xmas Gifts for Dad Mom Coworkers Runners(02XS)</p>
+            <div class="product-footer">
+              <p class="price">₹990</p>
+              <a href="tel:+917879925587" class="btn-call">
+                <i data-lucide="phone"></i>
+                Call to Order
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_waY4ffZ9D6CpSQbW8oZ9Q-qPdKcPRPeRFR5i2WN4okCtcOSWSAOooMVNHDp4LU-XgWUoBjo8HUWTeR65U0194KkQGTU07Nr04EfoizdP4X-hNHQKdZYSBtd0ahGS4apDjSA01kYWXftD0O0Fq0YcIRWnahhhn2A0Z8T3gBxMHW_uFa_QFon5J5-vZLI0/s1080/Suction%20Cup.jpg" alt="Essential Oils">
+            <span class="product-tag">New</span>
+          </div>
+          <div class="product-info">
+            <h3>Suction Cupping Therapy Set</h3>
+            <p>Suction Cupping Therapy Set, Anti Cellulite Cup</p>
+            <div class="product-footer">
+              <p class="price">₹2999</p>
+              <a href="tel:+917879925587" class="btn-call">
+                <i data-lucide="phone"></i>
+                Call to Order
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh_mpMwy6XSjW7dbnx63q2APbaoBf5uFlo9wPhYqQ1elkAW9Kr54ZLZLGnVobALjCApI15Wfh02dphXznyERoUS4b4-JkdMSJp3Va9gqa7nRj8pTgOfZbcItfervP1oGQ48IUg6Anhwo4SvUA4QDhyX50cmLyJHmHMjGQmy1zR_iA3G3vmEBZXi_tdwCuFj/s736/FootMassageMatAcupressureMat1.jpg" alt="Healing Crystals">
+            <span class="product-tag">Popular</span>
+          </div>
+          <div class="product-info">
+            <h3>Acupressure Reflexology Magnetic Pyramidal Therapy Power Pain Relief</h3>
+            <p>Energy Foot Health Mat Set of 1 + Sujok Rings Set of 5 L X W X H – 30 X 30 X 7 cm Yellow Mat</p>
+            <div class="product-footer">
+              <p class="price">₹400</p>
+              <a href="tel:+917879925587" class="btn-call">
+                <i data-lucide="phone"></i>
+                Call to Order
+              </a>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Add slider controls for mobile -->
+        <div class="slider-controls">
+          <button class="slider-button prev" aria-label="Previous slide">
+            <i data-lucide="chevron-left"></i>
+          </button>
+          <div class="slider-dots"></div>
+          <button class="slider-button next" aria-label="Next slide">
+            <i data-lucide="chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      <!-- Add this view all products button container -->
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="products.html" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+          View All Products
+          <i data-lucide="arrow-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3><i class="fas fa-phone-alt"></i> Contact Us</h3>
+          <p><i class="fas fa-phone"></i> +91 7879925587</p>
+          <p><i class="fas fa-phone"></i> +91 9297516732</p>
+          <p><i class="fas fa-envelope"></i> singhjishivam65@gmail.com</p>
+          <div class="social-icons">
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/919297516732" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/share/19kHgn4QTL/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://t.me/+919297516732" target="_blank"><i class="fab fa-telegram"></i></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3><i class="fas fa-clock"></i> Hours</h3>
+          <p>Monday - Friday: 9:00 AM - 7:00 PM</p>
+          <p>Saturday: 10:00 AM - 5:00 PM</p>
+          <p>Sunday: Closed</p>
+        </div>
+        <div class="footer-section">
+          <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+          <p>Gayatri Saktipeeth Marwari Dharamshala Garhpura,</p>
+          <p>Dunhi, Bihar 848204</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Acupressure Wellness Center. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Product Slider functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const isMobile = window.innerWidth <= 640;
+      if (!isMobile) return;
+
+      const products = document.querySelectorAll('.product-card');
+      const dotsContainer = document.querySelector('.slider-dots');
+      const prevButton = document.querySelector('.slider-button.prev');
+      const nextButton = document.querySelector('.slider-button.next');
+      let currentIndex = 0;
+      let autoSlideInterval;
+
+      // Create dots
+      products.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('slider-dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+      });
+
+      // Update active slide
+      function updateSlide() {
+        products.forEach((product, index) => {
+          product.classList.toggle('active', index === currentIndex);
+        });
+        
+        document.querySelectorAll('.slider-dot').forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentIndex);
+        });
+
+        // Update button states
+        prevButton.disabled = currentIndex === 0;
+        nextButton.disabled = currentIndex === products.length - 1;
+      }
+
+      // Go to specific slide
+      function goToSlide(index) {
+        currentIndex = index;
+        updateSlide();
+        resetAutoSlide();
+      }
+
+      // Next slide
+      function nextSlide() {
+        if (currentIndex < products.length - 1) {
+          currentIndex++;
+          updateSlide();
+          resetAutoSlide();
+        }
+      }
+
+      // Previous slide
+      function prevSlide() {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateSlide();
+          resetAutoSlide();
+        }
+      }
+
+      // Auto slide functionality
+      function startAutoSlide() {
+        autoSlideInterval = setInterval(() => {
+          if (currentIndex === products.length - 1) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          updateSlide();
+        }, 3000); // Change slide every 3 seconds
+      }
+
+      function resetAutoSlide() {
+        clearInterval(autoSlideInterval);
+        startAutoSlide();
+      }
+
+      // Event listeners
+      prevButton.addEventListener('click', prevSlide);
+      nextButton.addEventListener('click', nextSlide);
+
+      // Touch events for swipe
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      document.querySelector('.products-grid').addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, false);
+
+      document.querySelector('.products-grid').addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, false);
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+        }
+      }
+
+      // Initialize
+      updateSlide();
+      startAutoSlide();
+    });
+
+    // Add navigation functionality
+    document.querySelectorAll('.nav-btn').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const section = e.target.dataset.section;
+        if (section === 'products') {
+          window.location.href = 'products.html';
+        } else if (section === 'services') {
+          // Scroll to services section
+          const servicesSection = document.querySelector('.services-section');
+          const navbarHeight = document.querySelector('.navbar').offsetHeight;
+          window.scrollTo({
+            top: servicesSection.offsetTop - navbarHeight,
+            behavior: 'smooth'
+          });
+        } else if (section === 'Home') {
+          window.location.href = 'index.html';
+        }
+        
+        // Update active button state
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        e.target.classList.add('active');
+      });
+    });
+
+    // Hamburger menu functionality
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      // Change hamburger icon
+      const icon = hamburger.querySelector('i');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+        navLinks.classList.remove('active');
+        const icon = hamburger.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
+
+    // Close menu when clicking a nav button
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        const icon = hamburger.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      });
+    });
+  </script>
+</body>
+</html>
