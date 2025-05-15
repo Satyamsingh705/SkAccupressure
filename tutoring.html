@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medical Therapy Training & Certification - Acupressure Wellness Center</title>
+  <script src="https://unpkg.com/lucide@latest"></script>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Updated Navbar Styles */
+    .navbar {
+      background-color: white;
+      padding: 0.75rem 2rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #16a34a;
+    }
+
+    .logo h1 {
+      font-size: 1.75rem;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .hamburger i {
+      font-size: 1.5rem;
+      color: #16a34a;
+      transition: transform 0.3s ease;
+    }
+
+    .hamburger:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 0;
+        flex-direction: column;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease-in-out;
+        max-height: 0;
+        overflow: hidden;
+      }
+
+      .nav-links.active {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+        padding: 1rem;
+        max-height: 300px;
+      }
+
+      .nav-btn {
+        width: 100%;
+        text-align: center;
+        margin: 0.5rem 0;
+        padding: 0.75rem;
+        border-radius: 8px;
+        background: #f3f4f6;
+        color: #16a34a;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .nav-btn:hover {
+        background: #16a34a;
+        color: white;
+        transform: translateX(5px);
+      }
+
+      .nav-btn.active {
+        background: #16a34a;
+        color: white;
+      }
+    }
+
+    /* Base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.5;
+      color: #1a1a1a;
+    }
+
+    /* Hero Section */
+    .tutoring-hero {
+      position: relative;
+      height: 80vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: white;
+      margin-top: 4rem;
+    }
+
+    .tutoring-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('https://blogger.googleusercontent.com/img/a/AVvXsEgEcRLlQNlqNksYhkX1t2RZ2trwXV0_m34OwpBTZPMZkQFiE6UQUqWnFGjXfPwCkGwS8J0yQiuA82URUoAylyAmFtLIcucepPVUeYXYuDYvgJ9X01gGQFFYridJeSwVrJNhe9k7Dm_QCxtO4lwsC78jMP503pOs-VMeFK8hcnvkpNW2aaMrXXTCRF3RECoB');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.6);
+    }
+
+    .tutoring-hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 0 1.5rem;
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+
+    .tutoring-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .tutoring-hero p {
+      font-size: clamp(1.125rem, 2vw, 1.25rem);
+      margin-bottom: 2rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    /* Section Styling */
+    .section {
+      padding: 5rem 1rem;
+    }
+
+    .section-dark {
+      background-color: #f9fafb;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.875rem, 3vw, 2.25rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .section-divider {
+      width: 6rem;
+      height: 0.25rem;
+      background-color: #16a34a;
+      margin: 0 auto;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header p {
+      max-width: 800px;
+      margin: 0 auto;
+      color: #6b7280;
+    }
+
+    /* Course Cards */
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .course-card {
+      background: white;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    }
+
+    .course-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .course-content {
+      padding: 1.5rem;
+    }
+
+    .course-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .course-desc {
+      color: #6b7280;
+      margin-bottom: 1.5rem;
+    }
+
+    .course-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .course-duration {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #16a34a;
+      font-weight: 500;
+    }
+
+    .badge {
+      background-color: #e9f5e9;
+      color: #16a34a;
+      font-size: 0.875rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-weight: 500;
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      position: relative;
+      height: 250px;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    /* Testimonial */
+    .testimonial-section {
+      background-color: #fff;
+      padding: 5rem 1rem;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonial {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .testimonial::before {
+      content: '\201C';
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 4rem;
+      color: rgba(22, 163, 74, 0.2);
+      line-height: 1;
+    }
+
+    .testimonial-content {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .testimonial-author img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .testimonial-info h4 {
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .testimonial-info p {
+      margin: 0;
+      color: #6b7280;
+    }
+
+    /* Certification Path */
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 4px;
+      background: #16a34a;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+      margin-right: auto;
+      margin-left: 4rem;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      margin-left: auto;
+      margin-right: 4rem;
+      text-align: right;
+    }
+
+    .timeline-content {
+      background: white;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      width: calc(50% - 4rem);
+      position: relative;
+    }
+
+    .timeline-content::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #16a34a;
+      border-radius: 50%;
+      top: 20px;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content::after {
+      right: -54px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content::after {
+      left: -54px;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      color: white;
+      text-align: center;
+      padding: 5rem 1rem;
+    }
+
+    .cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-text {
+      margin-bottom: 2rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background-color: #16a34a;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 9999px;
+      font-size: 1.125rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary:hover {
+      background-color: #15803d;
+      transform: scale(1.05);
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 9999px;
+      font-size: 1.125rem;
+      font-weight: 500;
+      border: 2px solid white;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-outline:hover {
+      background-color: white;
+      color: #16a34a;
+      transform: scale(1.05);
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 40px;
+      }
+      
+      .timeline-item:nth-child(odd) .timeline-content,
+      .timeline-item:nth-child(even) .timeline-content {
+        width: calc(100% - 80px);
+        margin-left: 80px;
+        margin-right: 0;
+        text-align: left;
+      }
+      
+      .timeline-item:nth-child(odd) .timeline-content::after,
+      .timeline-item:nth-child(even) .timeline-content::after {
+        left: -54px;
+        right: auto;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .course-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+
+    /* Nav Button Styles */
+    .nav-btn {
+        background: #16a34a;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .nav-btn:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            120deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent
+        );
+        transition: all 0.5s ease;
+    }
+
+    .nav-btn:hover:before {
+        left: 100%;
+    }
+
+    .nav-btn:hover {
+        background: #15803d;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+    }
+
+    .nav-btn.active {
+        background: #15803d;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* Footer Styles */
+    .footer {
+      background-color: #111827;
+      color: white;
+      padding: 5rem 1rem 2.5rem;
+    }
+
+    .footer-content {
+      max-width: 72rem;
+      margin: 0 auto;
+      display: grid;
+      gap: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      margin-bottom: 4rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-icons {
+      margin-top: 15px;
+      display: flex;
+      gap: 15px;
+    }
+    
+    .social-icons a {
+      text-decoration: none;
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+    
+    .social-icons .fa-instagram {
+      color: #E4405F;
+    }
+    
+    .social-icons .fa-facebook {
+      color: #1877F2;
+    }
+    
+    .social-icons .fa-telegram {
+      color: #0088cc;
+    }
+    
+    .social-icons .fa-whatsapp {
+      color: #25D366;
+    }
+    
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+
+    .footer-bottom {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid #1f2937;
+      text-align: center;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="min-h-screen bg-gray-50">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">
+        <i class="fas fa-leaf"></i>
+        <h1>Acupressure Wellness Center</h1>
+      </div>
+      <button class="hamburger" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links">
+        <button class="nav-btn" data-section="Home">Home</button>
+        <button class="nav-btn" data-section="products">Products</button>
+        <button class="nav-btn active" data-section="tutoring">Tutoring</button>
+        <button class="nav-btn" data-section="services">Services</button>
+      </div>
+    </nav>
+
+    <!-- Courses Section (Now First Section) -->
+    <section class="section" style="margin-top: 6rem;">
+      <div class="section-header">
+        <h2>Our Training Programs</h2>
+        <div class="section-divider"></div>
+        <p>Comprehensive courses designed to give you professional expertise in different healing modalities</p>
+      </div>
+
+      <div class="course-grid">
+        <!-- Course 1 -->
+        <div class="course-card">
+          <img class="course-img" src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9" alt="Acupressure Foundations">
+          <div class="course-content">
+            <h3 class="course-title">Acupressure Fundamentals</h3>
+            <p class="course-desc">Learn the core principles and techniques of acupressure therapy. This course covers meridian theory, pressure point locations, and basic treatment protocols.</p>
+            <div class="course-meta">
+              <span class="course-duration">
+                <i class="fas fa-clock"></i>
+                4 weeks
+              </span>
+              <span class="badge">Beginner</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 2 -->
+        <div class="course-card">
+          <img class="course-img" src="https://images.unsplash.com/photo-1600333859399-8e4137734957" alt="Advanced Acupressure Techniques">
+          <div class="course-content">
+            <h3 class="course-title">Advanced Acupressure</h3>
+            <p class="course-desc">Deepen your knowledge with specialized techniques for chronic conditions, sports injuries, and stress-related disorders. For practitioners with basic training.</p>
+            <div class="course-meta">
+              <span class="course-duration">
+                <i class="fas fa-clock"></i>
+                6 weeks
+              </span>
+              <span class="badge">Intermediate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 3 -->
+        <div class="course-card">
+          <img class="course-img" src="https://images.unsplash.com/photo-1519824145371-296894a0daa9" alt="Cupping Therapy Certification">
+          <div class="course-content">
+            <h3 class="course-title">Cupping Therapy</h3>
+            <p class="course-desc">Master the art of cupping therapy for pain relief, improved circulation, and detoxification. Includes practical training and client assessment techniques.</p>
+            <div class="course-meta">
+              <span class="course-duration">
+                <i class="fas fa-clock"></i>
+                3 weeks
+              </span>
+              <span class="badge">All Levels</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certification Path -->
+    <section class="section section-dark">
+      <div class="section-header">
+        <h2>Your Certification Path</h2>
+        <div class="section-divider"></div>
+        <p>Follow our structured learning path to become a certified practitioner</p>
+      </div>
+
+      <div class="timeline">
+        <!-- Step 1 -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>Foundation Training</h3>
+            <p>Begin with the fundamentals of acupressure therapy and holistic healing principles.</p>
+            <p><strong>Duration:</strong> 4 weeks</p>
+            <p><strong>Certification:</strong> Level 1 Practitioner</p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>Specialization</h3>
+            <p>Develop specialized skills in different treatment modalities and protocols.</p>
+            <p><strong>Duration:</strong> 6 weeks</p>
+            <p><strong>Certification:</strong> Advanced Practitioner</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>Supervised Practice</h3>
+            <p>Apply your skills with real clients under expert guidance and supervision.</p>
+            <p><strong>Duration:</strong> 8 weeks</p>
+            <p><strong>Certification:</strong> Clinical Practitioner</p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>Master Certification</h3>
+            <p>Complete your final assessment and become a fully certified professional.</p>
+            <p><strong>Duration:</strong> 2 weeks</p>
+            <p><strong>Certification:</strong> Master Practitioner</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2>Training Gallery</h2>
+        <div class="section-divider"></div>
+        <p>See our students in action learning acupressure techniques</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1600333859399-8e4137734957" alt="Acupressure Workshop">
+          <div class="gallery-overlay">
+            <h4>Acupressure Workshop</h4>
+            <p>Hands-on training with expert guidance</p>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118" alt="Certification Ceremony">
+          <div class="gallery-overlay">
+            <h4>Certification Ceremony</h4>
+            <p>Celebrating our graduates' achievements</p>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1570174006382-148305f5197b" alt="Cupping Therapy Training">
+          <div class="gallery-overlay">
+            <h4>Cupping Therapy Training</h4>
+            <p>Learning advanced cupping techniques</p>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1519824145371-296894a0daa9" alt="Group Session">
+          <div class="gallery-overlay">
+            <h4>Group Learning Session</h4>
+            <p>Collaborative training environment</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonial-section">
+      <div class="section-header">
+        <h2>Student Testimonials</h2>
+        <div class="section-divider"></div>
+        <p>What our graduates say about their learning experience</p>
+      </div>
+
+      <div class="testimonial-grid">
+        <!-- Testimonial 1 -->
+        <div class="testimonial">
+          <p class="testimonial-content">The acupressure training program completely transformed my understanding of holistic healing. The personalized attention helped me master techniques I struggled with for years.</p>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Priya Sharma">
+            <div class="testimonial-info">
+              <h4>Priya Sharma</h4>
+              <p>Certified Practitioner, Delhi</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial">
+          <p class="testimonial-content">After completing the advanced course, I was able to open my own wellness practice. The hands-on training and business guidance provided were invaluable for my success.</p>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul Patel">
+            <div class="testimonial-info">
+              <h4>Rahul Patel</h4>
+              <p>Wellness Center Owner, Mumbai</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial">
+          <p class="testimonial-content">I took the beginner's course with zero experience. The step-by-step approach and patience of the instructors helped me build confidence in my abilities.</p>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Meera Patel">
+            <div class="testimonial-info">
+              <h4>Meera Patel</h4>
+              <p>Wellness Enthusiast, Bangalore</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-content">
+        <h2 class="cta-title">Ready to Begin Your Healing Journey?</h2>
+        <p class="cta-text">Enroll in our courses today and embark on a rewarding career in holistic wellness</p>
+        <div class="cta-buttons">
+          <a href="tel:+917879925587" class="btn-primary">
+            <i class="fas fa-phone"></i>
+            Call to Enroll
+          </a>
+          <a href="#" class="btn-outline">
+            <i class="fas fa-calendar"></i>
+            View Schedule
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3><i class="fas fa-phone-alt"></i> Contact Us</h3>
+          <p><i class="fas fa-phone"></i> +91 7879925587</p>
+          <p><i class="fas fa-phone"></i> +91 9297516732</p>
+          <p><i class="fas fa-envelope"></i> singhjishivam65@gmail.com</p>
+          <div class="social-icons">
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/919297516732" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/share/19kHgn4QTL/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://t.me/+919297516732" target="_blank"><i class="fab fa-telegram"></i></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3><i class="fas fa-clock"></i> Hours</h3>
+          <p>Monday - Friday: 9:00 AM - 7:00 PM</p>
+          <p>Saturday: 10:00 AM - 5:00 PM</p>
+          <p>Sunday: Closed</p>
+        </div>
+        <div class="footer-section">
+          <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+          <p>Gayatri Saktipeeth Marwari Dharamshala Garhpura,</p>
+          <p>Dunhi, Bihar 848204</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Acupressure Wellness Center. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Hamburger menu functionality
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (hamburger) {
+      hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        // Change hamburger icon
+        const icon = hamburger.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+      });
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (hamburger && !hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+        navLinks.classList.remove('active');
+        const icon = hamburger.querySelector('i');
+        if (icon) {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+      }
+    });
+
+    // Navigation functionality
+    document.querySelectorAll('.nav-btn').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const section = e.target.dataset.section;
+        if (section === 'Home') {
+          window.location.href = 'index.html';
+        } else if (section === 'products') {
+          window.location.href = 'products.html';
+        } else if (section === 'tutoring') {
+          window.location.href = 'tutoring.html';
+        } else if (section === 'services') {
+          window.location.href = 'index.html#services';
+        }
+        
+        // Update active button state
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        e.target.classList.add('active');
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const navbarHeight = document.querySelector('.navbar').offsetHeight;
+          const targetPosition = target.offsetTop - navbarHeight;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
